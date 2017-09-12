@@ -1,5 +1,5 @@
-importScripts('https://www.gstatic.com/firebasejs/4.1.2/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/4.1.2/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/4.3.1/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/4.3.1/firebase-messaging.js');
 
 if (firebase.apps.length > 0)
     firebase.messaging();
