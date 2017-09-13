@@ -67,14 +67,17 @@ function getRoot() {
         if (typeof root.Push === 'undefined' || root.Push === null)
             console.error(ERR_NO_PUSH);
         else {
-            function extendWhenFirebaseIsLoaded() {
+            function extendWhenFirebaseIsLoaded(attemptsCount) {
                 if (root.firebase) root.Push.extend(factory(root, root.firebase));
-                else {
+                else if (attemptsCount <= 10) {
                     console.debug('Firebase not loaded yet, will retry.');
-                    root.setTimeout(extendWhenFirebaseIsLoaded, 5000);
+                    root.setTimeout(function() { extendWhenFirebaseIsLoaded(attemptsCount+1) }, 6000);
+                }
+                else {
+                  console.debug('Firebase not loaded after 60 seconds, giving up.')
                 }
             }
-            extendWhenFirebaseIsLoaded();
+            extendWhenFirebaseIsLoaded(1);
         }
     }
 
